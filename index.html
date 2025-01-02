@@ -6,6 +6,87 @@
   <title>测试代码片段</title>
 </head>
 <body>
-  <script src="./src/三数之和.js"></script>
+  <!-- <script src="./src/三数之和.js"></script> -->
+  <script>
+    window.onload = function() {
+      //   async function async1() {
+      //     console.log('async1 start');
+      //     await async2();
+      //     console.log('async1 end');
+      //   }
+
+      //   async function async2() {
+      //     console.log('async2');
+      //   }
+
+      //   console.log('script start');
+
+      //   setTimeout(() => {
+      //     console.log('setTimeOut');
+      //   }, 0)
+
+      //   async1();
+
+      //   new Promise(function (resolve) {
+      //     console.log('promise1');
+      //     resolve();
+      //   }).then(function() {
+      //     console.log('promise2');
+      //   })
+      //   console.log('script end');
+      // }
+
+      function arrayToTree(arr) {
+        let result = [];
+        let map = new Map();
+
+        arr.forEach((item) => {
+          map.set(item.id, {...item, children: []});
+        });
+
+        arr.forEach((item) => {
+          let node = map.get(item.id);
+          if (!item.parentId) {
+            result.push(node);
+          } else {
+            let parent = map.get(item.parentId);
+            if (parent) {
+              parent.children.push(node);
+            }
+          }
+        })
+
+        return result;
+      }
+      let list = [
+        {
+          id: '1-1',
+          title: '节点1-1',
+          parentId: '1'
+        },
+        {
+          id: '1',
+          title: '节点1',
+          parentId: ''
+        },
+        {
+          id: '1-2',
+          title: '节点1-2',
+          parentId: '1'
+        },
+        {
+          id: '2',
+          title: '节点2',
+          parentId: ''
+        },
+        {
+          id: '2-1',
+          title: '节点2-1',
+          parentId: '2'
+        }
+      ];
+      console.log(arrayToTree(list));
+    }
+  </script>
 </body>
 </html>
